@@ -27,9 +27,11 @@ SwaggerModule.setup('api', app, document,{
     tagsSorter: 'alpha',
   },
 });
+const port = parseInt(process.env.PORT || '3000');
+console.log('port = ', process.env.PORT);
+const server = process.env.SERVER;
+await app.listen(port, server || '0.0.0.0');
 
-
-
-  await app.listen(process.env.PORT ?? 3000);
+console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
