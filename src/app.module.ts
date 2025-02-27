@@ -7,6 +7,7 @@ import { getPostgresConfig } from './configs/postgres.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { StudioModule } from './studio/studio.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -14,11 +15,12 @@ import { AuthModule } from './auth/auth.module';
   }),
   TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
-    inject: [ConfigService],
     useFactory: getPostgresConfig,
+    inject: [ConfigService],
   }),
     UserModule,
-    AuthModule],
+    AuthModule,
+    StudioModule],
   controllers: [AppController],
   providers: [AppService],
 })
