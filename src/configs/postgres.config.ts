@@ -13,6 +13,6 @@ export const getPostgresConfig = async (
     database: configService.get('DATABASE_NAME'),
     synchronize: configService.get('DATABASE_SYNCHRONIZE') === 'true',
     autoLoadEntities: true,
-    logging: true
+    logging: true,
   };
 };

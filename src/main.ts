@@ -13,25 +13,24 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type, Authorization',
   });
 
-
   const config = new DocumentBuilder()
-  .setTitle('SANDB[]X API')
-  .setDescription('API description')
-  .setVersion('1.0')
-  .build();
-  
-const document = SwaggerModule.createDocument(app, config);
-SwaggerModule.setup('api', app, document,{
-  swaggerOptions: {
-    persistAuthorization: true,
-    tagsSorter: 'alpha',
-  },
-});
-const port = parseInt(process.env.PORT || '3000');
-console.log('port = ', process.env.PORT);
-const server = process.env.SERVER;
-await app.listen(port, server || '0.0.0.0');
+    .setTitle('SANDB[]X API')
+    .setDescription('API description')
+    .setVersion('1.0')
+    .build();
 
-console.log(`Application is running on: ${await app.getUrl()}`);
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document, {
+    swaggerOptions: {
+      persistAuthorization: true,
+      tagsSorter: 'alpha',
+    },
+  });
+  const port = parseInt(process.env.PORT || '3000');
+  console.log('port = ', process.env.PORT);
+  const server = process.env.SERVER;
+  await app.listen(port, server || '0.0.0.0');
+
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
