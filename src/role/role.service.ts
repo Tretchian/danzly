@@ -1,15 +1,27 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
+import { Role } from './entities/role.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class RoleService {
-  create(createRoleDto: CreateRoleDto) {
-    return 'This action adds a new role';
+constructor(
+  @InjectRepository(Role)
+  private readonly repository : Repository<Role>
+  ){}
+  
+  async create(createRoleDto: CreateRoleDto) {
+    const roleToCreate =  await this.repository.findOneBy({name:createRoleDto.name});
+    if (roleToCreate){
+      throw new BadRequestException(`Роль с именем name=${createRoleDto.name} уже существует!`);
+    }
+    return this.repository.save(createRoleDto);
   }
 
   findAll() {
-    return `This action returns all role`;
+    return this.repository.find({});
   }
 
   findOne(id: number) {

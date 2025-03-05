@@ -6,11 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateUserRoleDto} from './dto/create-user-role.dto';
+import { GetUserPageDto } from './dto/get-user-page.dto';
 
 @Controller('user')
 export class UserController {
@@ -28,11 +30,17 @@ export class UserController {
 
  
 
-  //TODO Добавить функционал и обращение к БД к эндпоинтам
+
   @Get()
   findAll() {
     return this.userService.findAll();
   }
+
+  @Get(':page')
+  findPage(@Query() getPageDto: GetUserPageDto) {
+    return this.userService.findPage(getPageDto);
+  }
+  //TODO Добавить функционал и обращение к БД к эндпоинтам
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);

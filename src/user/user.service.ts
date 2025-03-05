@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserRoleDto } from './dto/create-user-role.dto';
+import { GetUserPageDto } from './dto/get-user-page.dto';
 
 @Injectable()
 export class UserService {
@@ -17,7 +18,6 @@ export class UserService {
     private readonly repository : Repository<User>
 
   ){}
-
 
   async assignRoleToUser(userId: number, roleId: number) {
     const userRole = this.userRoleRepository.create({ userId, roleId }); 
@@ -47,9 +47,16 @@ export class UserService {
   }
 
   //TODO Описать обработчики запросов
-  findAll() {
-    return `This action returns all user`;
+  findAll(){
+    return this.repository.find();
   }
+
+  findPage(pageDto: GetUserPageDto) {
+    const entities_to_skip = (pageDto.entities_on_page * pageDto.page);
+    console.log(pageDto);
+    return this.repository.find({skip: +entities_to_skip, take:pageDto.entities_on_page});
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} user`;
   }
@@ -57,8 +64,6 @@ export class UserService {
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
-
-
 
   remove(id: number) {
     return `This action removes a #${id} user`;
