@@ -27,6 +27,7 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+.sql_homework/*
 
 # IDE - VSCode
 .vscode/*
@@ -54,3 +55,9 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+sql_homework/create-tables.sql
+sql_homework/insert-values.sql
+sql_homework/task-1.sql
+sandbox.session.sql
+sql_homework/task-2.sql
+sql_homework/task-3.sql
