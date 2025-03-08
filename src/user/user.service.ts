@@ -1,32 +1,28 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserRoleRepository } from './repositories/UserRoleRepository';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserRoleDto } from './dto/create-user-role.dto';
 import { GetUserPageDto } from './dto/get-user-page.dto';
 
 @Injectable()
 export class UserService {
   constructor(
-
-    @InjectRepository(UserRoleRepository)
-    private readonly userRoleRepository: UserRoleRepository,
     @InjectRepository(User)
     private readonly repository : Repository<User>
 
   ){}
 
-  async assignRoleToUser(userId: number, roleId: number) {
-    const userRole = this.userRoleRepository.create({ userId, roleId }); 
-    return this.userRoleRepository.save(userRole);
+  async getUserRole(userId: number) {
+    return this.repository.find({select:{role_id:true},where:{id:userId}})
   }
 
-  async getUserRoles(userId: number) {
-    return this.userRoleRepository.findRolesByUserId(userId);
-  }
+  async changeRole(userId: number, newRoleId:number){
+    const userToChange = await this.repository.findOneByOrFail({id:userId});
+    userToChange.role_id = newRoleId;
+    return this.repository.save(userToChange);
+  } //TODO протестировать правильно ли меняются данные
 
   async create(createUserDto: CreateUserDto) {
     const existingUser = await this.findByUsername(createUserDto.username);
@@ -35,18 +31,15 @@ export class UserService {
        `Пользователь с именем ${createUserDto.username} уже существует`
       );
     }
-    return  this.assignRoleToUser((await this.repository.save(createUserDto)).id,createUserDto.roleId);
+    return  this.repository.create(createUserDto);
   }
 
   async findByUsername(username: string) {
     return this.repository.findOneBy({ username });
   }
 
-  addRole(dto: CreateUserRoleDto){
-    this.userRoleRepository.addRoleToUser(dto);
-  }
-
   //TODO Описать обработчики запросов
+
   findAll(){
     return this.repository.find();
   }

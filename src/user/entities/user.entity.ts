@@ -1,16 +1,52 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
-import { UserRole } from "./user_role.entity";
+import { Role } from "src/role/entities/role.entity";
+import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column({
+    unique: true,
+    type:"varchar",
+    length:60})
   username: string;
 
   @Column()
-  password: string;
+  @ManyToOne(()=> Role,(role)=>role.id)
+  role_id: number;
 
-  @OneToMany(()=>UserRole,(user_role)=> user_role.userId)
-  userRoles: UserRole[];
+  @Column({
+    type:"varchar",
+    length:63})
+  name: string;
+
+  @Column({
+    type:"varchar",
+    length:63})
+  surname: string;
+
+  //TODO avatar image field for user
+
+  @Column({
+    type:"varchar",
+    length:30})
+  city: string;
+
+  @Column({
+    type:"varchar",
+    length:60})
+  telegram: string;
+
+  @Column({
+    type:"varchar",
+    length:63})
+  phone: string;
+
+  //TODO add data validation for email
+  
+  @Column()
+  email: string;
+
+  @Column()
+  password: string;
 }
