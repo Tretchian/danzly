@@ -1,11 +1,33 @@
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateUserDto {
-  @ApiProperty({ default: 'name1' })
+  @ApiProperty({})
   username: string;
 
-  @ApiProperty({ default: '123' })
-  password: string;
+  @ApiProperty()
+  role_id: number;
 
-  @ApiProperty({default: '1'})
-  roleId:number;
+  @ApiProperty({})
+  name: string;
+
+  @ApiProperty({})
+  surname: string;
+
+  //TODO avatar image field for user
+
+  @ApiProperty({})
+  city: string;
+
+  @ApiProperty({})
+  telegram: string;
+
+  @ApiProperty({})
+  phone: string;
+
+  //TODO add data validation for email
+  
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  password: string;
 }

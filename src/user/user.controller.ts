@@ -11,7 +11,6 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { CreateUserRoleDto} from './dto/create-user-role.dto';
 import { GetUserPageDto } from './dto/get-user-page.dto';
 
 @Controller('user')
@@ -23,13 +22,10 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Post('role')
-  updateRole(@Body() dto: CreateUserRoleDto) {
-    return this.userService.addRole(dto);
+  @Patch()
+  updateRole(@Query('userId') userId:number,@Query('newRoleId') newRoleId:number) {
+    return this.userService.updateRole(userId,newRoleId);
   }
-
- 
-
 
   @Get()
   findAll() {

@@ -11,18 +11,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly repository : Repository<User>
-
   ){}
-
-  async getUserRole(userId: number) {
-    return this.repository.find({select:{role_id:true},where:{id:userId}})
-  }
-
-  async changeRole(userId: number, newRoleId:number){
-    const userToChange = await this.repository.findOneByOrFail({id:userId});
-    userToChange.role_id = newRoleId;
-    return this.repository.save(userToChange);
-  } //TODO протестировать правильно ли меняются данные
 
   async create(createUserDto: CreateUserDto) {
     const existingUser = await this.findByUsername(createUserDto.username);
@@ -31,14 +20,16 @@ export class UserService {
        `Пользователь с именем ${createUserDto.username} уже существует`
       );
     }
-    return  this.repository.create(createUserDto);
+    return  this.repository.save(createUserDto);
+  }
+
+  async getUserRole(userId: number) {
+    return this.repository.find({select:{role_id:true},where:{id:userId}})
   }
 
   async findByUsername(username: string) {
     return this.repository.findOneBy({ username });
   }
-
-  //TODO Описать обработчики запросов
 
   findAll(){
     return this.repository.find();
@@ -57,6 +48,12 @@ export class UserService {
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
+
+  async updateRole(userId: number, newRoleId:number){
+    const userToChange = await this.repository.findOneByOrFail({id:userId});
+    userToChange.role_id = newRoleId;
+    return this.repository.save(userToChange);
+  } //TODO протестировать правильно ли меняются данные
 
   remove(id: number) {
     return `This action removes a #${id} user`;
