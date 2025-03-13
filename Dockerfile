@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Открываем порт, который использует приложение (например, 3000)
-EXPOSE 7777
+# EXPOSE 7777
 
 # Команда для запуска сервера
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start"]
