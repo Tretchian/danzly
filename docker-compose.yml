@@ -12,7 +12,7 @@ services:  # Определяем сервисы (контейнеры)
       DATABASE_URL: "postgres://postgres:password@db:5432/mydatabase"  # Подключение к базе
 
   db:  # Контейнер с PostgreSQL
-    image: postgres:latest  # Используем официальный образ
+    image: postgres:17.0  # Используем официальный образ
     ports:
       - "5433:5432"  # Открываем порт для локального доступа
     environment:
