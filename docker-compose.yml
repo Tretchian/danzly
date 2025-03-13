@@ -1,5 +1,3 @@
-version: '3.8'  # Версия синтаксиса Docker Compose
-
 services:  # Определяем сервисы (контейнеры)
 
   app:  # Контейнер для Node.js приложения
@@ -8,6 +6,8 @@ services:  # Определяем сервисы (контейнеры)
       - "7777:7777"  # Прокидываем порт (локально 3000 -> контейнер 3000)
     depends_on:
       - db  # Ждём, пока запустится база данных
+    env_file: 
+    - .env.docker 
     environment:
       DATABASE_URL: "postgres://postgres:password@db:5432/mydatabase"  # Подключение к базе
 
@@ -17,5 +17,5 @@ services:  # Определяем сервисы (контейнеры)
       - "5433:5432"  # Открываем порт для локального доступа
     environment:
       POSTGRES_USER: postgres  # Логин
-      POSTGRES_PASSWORD: zeroquestions  # Пароль
+      POSTGRES_PASSWORD: zero  # Пароль
       POSTGRES_DB: sandbox_erp  # Имя базы
