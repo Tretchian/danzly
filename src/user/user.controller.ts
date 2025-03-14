@@ -22,7 +22,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Patch()
+  @Patch() // TODO а нужен ли теперь отдельный эндпоинт для обновления роли?
   updateRole(@Query('userId') userId:number,@Query('newRoleId') newRoleId:number) {
     return this.userService.updateRole(userId,newRoleId);
   }
@@ -36,7 +36,7 @@ export class UserController {
   findPage(@Query() getPageDto: GetUserPageDto) {
     return this.userService.findPage(getPageDto);
   }
-  //TODO Добавить функционал и обращение к БД к эндпоинтам
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);

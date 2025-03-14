@@ -42,20 +42,37 @@ export class UserService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.repository.findOneByOrFail({id});
   }
   
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const existingUser = await this.repository.findOneByOrFail({id});
+    if (!existingUser) {
+      throw new BadRequestException(
+       `Пользователя  с id ${id} не сущестует`
+      );
+    }
+    // Динамически обновляем все поля, кроме undefined и null
+    Object.keys(updateUserDto).forEach((key) => {
+      if (updateUserDto[key] !== null && updateUserDto[key] !== undefined) {
+          existingUser[key] = updateUserDto[key];
+      }
+    });//TODO добавить проверку, что username уже существует у другого пользователя
+    return  this.repository.save(existingUser);
   }
 
   async updateRole(userId: number, newRoleId:number){
     const userToChange = await this.repository.findOneByOrFail({id:userId});
     userToChange.role_id = newRoleId;
     return this.repository.save(userToChange);
-  } //TODO протестировать правильно ли меняются данные
+  }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    if (!await this.repository.existsBy({id})){
+      throw new BadRequestException(
+        `Пользователя с id ${id} не сущестует`
+      )
+    }
+    return this.repository.delete({id});
   }
 }

@@ -23,8 +23,6 @@ export class CreateUserDto {
   @ApiProperty({})
   phone: string;
 
-  //TODO add data validation for email
-  
   @ApiProperty()
   email: string;
 
