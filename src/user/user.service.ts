@@ -57,7 +57,7 @@ export class UserService {
       if (updateUserDto[key] !== null && updateUserDto[key] !== undefined) {
           existingUser[key] = updateUserDto[key];
       }
-    });//TODO добавить проверку, что username уже существует у другого пользователя
+    });
     return  this.repository.save(existingUser);
   }
 

@@ -25,14 +25,31 @@ constructor(
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} role`;
+    return this.repository.findOneByOrFail({id});
   }
 
-  update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
+  async update(id: number, updateRoleDto: UpdateRoleDto) {
+    const existingRole = await this.repository.findOneByOrFail({id});
+    if (!existingRole) {
+      throw new BadRequestException(
+       `Роли с id ${id} не сущестует`
+      );
+    }
+    // Динамически обновляем все поля, кроме undefined и null
+    Object.keys(updateRoleDto).forEach((key) => {
+      if (updateRoleDto[key] !== null && updateRoleDto[key] !== undefined) {
+          existingRole[key] = updateRoleDto[key];
+      }
+    });
+    return  this.repository.save(existingRole);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} role`;
+  async remove(id: number) {
+    if (!await this.repository.existsBy({id})){
+      throw new BadRequestException(
+        `Роли с id ${id} не сущестует`
+      )
+    }
+    return this.repository.delete({id}); //TODO удаление ролей и у юзеров?
   }
 }
