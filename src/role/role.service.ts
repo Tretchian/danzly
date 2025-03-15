@@ -4,12 +4,17 @@ import { UpdateRoleDto } from './dto/update-role.dto';
 import { Role } from './entities/role.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { User } from 'src/user/entities/user.entity';
+
 
 @Injectable()
 export class RoleService {
 constructor(
   @InjectRepository(Role)
-  private readonly repository : Repository<Role>
+  private readonly repository : Repository<Role>,
+
+  @InjectRepository(User)
+  private readonly userRepository : Repository<User>
   ){}
   
   async create(createRoleDto: CreateRoleDto) {
@@ -25,14 +30,35 @@ constructor(
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} role`;
+    return this.repository.findOneByOrFail({id});
   }
 
-  update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
+  async update(id: number, updateRoleDto: UpdateRoleDto) {
+    const existingRole = await this.repository.findOneByOrFail({id});
+    if (!existingRole) {
+      throw new BadRequestException(
+       `Роли с id ${id} не сущестует`
+      );
+    }
+    // Динамически обновляем все поля, кроме undefined и null
+    Object.keys(updateRoleDto).forEach((key) => {
+      if (updateRoleDto[key] !== null && updateRoleDto[key] !== undefined) {
+          existingRole[key] = updateRoleDto[key];
+      }
+    });
+    return  this.repository.save(existingRole);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} role`;
+  async remove(id: number) {
+    if (!await this.repository.existsBy({id})){
+      throw new BadRequestException(
+        `Роли с id ${id} не сущестует`
+      )
+    }
+    const usersWithRole = await this.userRepository.countBy({role_id:id})
+    if(usersWithRole>0){
+      throw new BadRequestException(`Нельзя удалить роль, пока она назначена пользователям (${usersWithRole} с этой ролью)! `)
+    }
+    return this.repository.delete({id});
   }
 }
