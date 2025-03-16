@@ -31,6 +31,7 @@ constructor(
 
   findOne(id: number) {
     return this.repository.findOneByOrFail({id});
+    return this.repository.findOneByOrFail({id});
   }
 
   async update(id: number, updateRoleDto: UpdateRoleDto) {
