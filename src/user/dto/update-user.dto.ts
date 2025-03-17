@@ -4,7 +4,10 @@ import { Role } from 'src/role/entities/role.entity';
 
 export class UpdateUserDto {
   
-    @ApiProperty({default:{id:1}})
+    @ApiProperty({
+        type:Role,
+        default:{id:1}
+    })
     role: Role;
   
     @ApiProperty({})

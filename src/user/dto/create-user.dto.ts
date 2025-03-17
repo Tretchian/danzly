@@ -4,7 +4,9 @@ export class CreateUserDto {
   @ApiProperty({})
   username: string;
 
-  @ApiProperty({default:{id:1}})
+  @ApiProperty({
+    type:Role,
+    default:{id:1}})
   role:Role;
 
   @ApiProperty({})

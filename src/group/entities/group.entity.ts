@@ -22,30 +22,21 @@ export class Group {
   description: string;
 
   @Column({
-    type:"varchar",
-    length:25
-    })
-  city: string;
-
-  @Column({
-    type:"varchar",
-    length:30
-    })
-  adress: string;
-
-  @Column({
-    type:"varchar",
-    length:63
-    })
-  phone: string;
-  
-  @Column({
     type:"int",
     nullable:false,
     default:10
     })
   max_people: number;
 
-  @Column()
-  password: string;
+  @Column({
+    type:"int",
+    default:0
+  })
+  current_people: number;
+
+  @Column({
+    type:"bool",
+    default:true
+  })
+  is_open: boolean;
 }

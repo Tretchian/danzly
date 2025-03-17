@@ -50,7 +50,7 @@ export class UserService {
   }
   
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const existingUser = await this.repository.findOneByOrFail({id});
+    const existingUser = await this.repository.findOneBy({id});
     if (!existingUser) {
       throw new BadRequestException(
        `Пользователя  с id ${id} не сущестует`
@@ -66,7 +66,7 @@ export class UserService {
   }
 
   async updateRole(userId: number, newRoleId:number){
-    const userToChange = await this.repository.findOneByOrFail({id:userId});
+    const userToChange = await this.repository.findOneByOrFail({id:userId}); //TODO - добавить проверку на null > заменить на findOneBy 
     const newRole = await this.roleRepository.findOneByOrFail({id:newRoleId});
     userToChange.role = newRole
     return this.repository.save(userToChange);
