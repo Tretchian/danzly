@@ -31,7 +31,6 @@ constructor(
 
   findOne(id: number) {
     return this.repository.findOneByOrFail({id});
-    return this.repository.findOneByOrFail({id});
   }
 
   async update(id: number, updateRoleDto: UpdateRoleDto) {
@@ -56,7 +55,7 @@ constructor(
         `Роли с id ${id} не сущестует`
       )
     }
-    const usersWithRole = await this.userRepository.countBy({role_id:id})
+    const usersWithRole = await this.userRepository.count({relations:['role'],where:{role:{id}}})
     if(usersWithRole>0){
       throw new BadRequestException(`Нельзя удалить роль, пока она назначена пользователям (${usersWithRole} с этой ролью)! `)
     }

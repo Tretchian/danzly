@@ -1,3 +1,5 @@
+import { group } from "console";
+import { Group } from "src/group/entities/group.entity";
 import { Role } from "src/role/entities/role.entity";
 import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 @Entity()
@@ -11,9 +13,11 @@ export class User {
     length:60})
   username: string;
 
-  @Column()
   @ManyToOne(()=> Role,(role)=>role.id)
-  role_id: number;
+  role: Role;
+
+  @OneToMany(()=> Group,(group)=>group.owner,{cascade:true})
+  groups: Group[]
 
   @Column({
     type:"varchar",

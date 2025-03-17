@@ -1,10 +1,11 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateUserDto } from './create-user.dto';
+import { Role } from 'src/role/entities/role.entity';
 
 export class UpdateUserDto {
   
-    @ApiProperty()
-    role_id: number;
+    @ApiProperty({default:{id:1}})
+    role: Role;
   
     @ApiProperty({})
     name: string;

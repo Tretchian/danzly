@@ -5,12 +5,16 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { GetUserPageDto } from './dto/get-user-page.dto';
+import { Role } from 'src/role/entities/role.entity';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly repository : Repository<User>
+    private readonly repository : Repository<User>,
+
+    @InjectRepository(Role)
+    private readonly roleRepository: Repository<Role>
   ){}
 
   async create(createUserDto: CreateUserDto) {
@@ -24,7 +28,7 @@ export class UserService {
   }
 
   async getUserRole(userId: number) {
-    return this.repository.find({select:{role_id:true},where:{id:userId}})
+    return this.repository.findOne({relations:['role'],where:{id:userId}})
   }
 
   async findByUsername(username: string) {
@@ -63,7 +67,8 @@ export class UserService {
 
   async updateRole(userId: number, newRoleId:number){
     const userToChange = await this.repository.findOneByOrFail({id:userId});
-    userToChange.role_id = newRoleId;
+    const newRole = await this.roleRepository.findOneByOrFail({id:newRoleId});
+    userToChange.role = newRole
     return this.repository.save(userToChange);
   }
 

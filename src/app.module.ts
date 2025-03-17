@@ -7,6 +7,7 @@ import { getPostgresConfig } from './configs/postgres.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
+import { GroupModule } from './group/group.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { RoleModule } from './role/role.module';
     }),
     UserModule,
     RoleModule,
+    GroupModule,
   ],
   controllers: [AppController],
   providers: [AppService],
