@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { GetUserPageDto } from './dto/get-user-page.dto';
+import { PageDto } from '../global/page.dto';
 import { Role } from 'src/role/entities/role.entity';
 
 @Injectable()
@@ -39,7 +39,7 @@ export class UserService {
     return this.repository.find();
   }
 
-  findPage(pageDto: GetUserPageDto) {
+  findPage(pageDto: PageDto) {
     const entities_to_skip = (pageDto.entities_on_page * pageDto.page);
     console.log(pageDto);
     return this.repository.find({skip: +entities_to_skip, take:pageDto.entities_on_page});

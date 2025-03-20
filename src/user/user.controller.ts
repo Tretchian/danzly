@@ -11,7 +11,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { GetUserPageDto } from './dto/get-user-page.dto';
+import { PageDto } from '../global/page.dto';
 
 @Controller('user')
 export class UserController {
@@ -33,7 +33,7 @@ export class UserController {
   }
 
   @Get(':page')
-  findPage(@Query() getPageDto: GetUserPageDto) {
+  findPage(@Query() getPageDto: PageDto) {
     return this.userService.findPage(getPageDto);
   }
 
