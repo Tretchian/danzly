@@ -8,6 +8,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { GroupModule } from './group/group.module';
+import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './service/auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +26,8 @@ import { GroupModule } from './group/group.module';
     UserModule,
     RoleModule,
     GroupModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
