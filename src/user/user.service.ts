@@ -6,12 +6,15 @@ import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { GetUserPageDto } from './dto/get-user-page.dto';
 import { Role } from 'src/role/entities/role.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
+  [x: string]: any;
   constructor(
     @InjectRepository(User)
     private readonly repository : Repository<User>,
+    private readonly jwtService: JwtService, 
 
     @InjectRepository(Role)
     private readonly roleRepository: Repository<Role>
@@ -23,8 +26,11 @@ export class UserService {
       throw new BadRequestException(
        `Пользователь с именем ${createUserDto.username} уже существует`
       );
-    }
-    return  this.repository.save(createUserDto);
+   }
+
+    const token = this.jwtService.sign({ email: createUserDto.email})
+
+    return  { user: this.repository.save(createUserDto), token: token };
   }
 
   async getUserRole(userId: number) {
@@ -45,8 +51,12 @@ export class UserService {
     return this.repository.find({skip: +entities_to_skip, take:pageDto.entities_on_page});
   }
 
-  findOne(id: number) {
-    return this.repository.findOneByOrFail({id});
+  async findOne(email: string) {
+    return await this.userRepository.findOne ({
+      where: {
+        email,
+      },
+    });
   }
   
   async update(id: number, updateUserDto: UpdateUserDto) {
