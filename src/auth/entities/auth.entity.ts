@@ -1,7 +1,6 @@
-export class Auth {}
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity()
+@Entity('AuthEntity')
 export class AuthEntity {
   @PrimaryGeneratedColumn('uuid') 
   id: string;

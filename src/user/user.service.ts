@@ -51,7 +51,7 @@ export class UserService {
     return this.repository.find({skip: +entities_to_skip, take:pageDto.entities_on_page});
   }
 
-  async findOne(email: string) {
+  async findOneByEmail(email: string) {
     return await this.userRepository.findOne ({
       where: {
         email,
@@ -66,6 +66,7 @@ export class UserService {
        `Пользователя  с id ${id} не сущестует`
       );
     }
+
     // Динамически обновляем все поля, кроме undefined и null
     Object.keys(updateUserDto).forEach((key) => {
       if (updateUserDto[key] !== null && updateUserDto[key] !== undefined) {
