@@ -1,0 +1,79 @@
+:local(.leftside) {
+    position: fixed;
+    top: 171px;
+    left: 81px;
+    display: flex;
+    gap: 28px;
+    flex-direction: column;
+    width: 226px;
+  }
+
+  :local(aside) h2 {
+    font-size: 24px;
+  }
+
+  :local(aside) p {
+    font-size: 20;
+  }
+
+  :local(aside) label {
+    font-size: 15;
+    color: #A2ACB7;
+  }
+
+  .apply {
+    height: 45px;
+    width: 91%;
+    background-color: #A2ACB7;
+    color: #1B1C20;
+    border: none;
+    border-radius: 17;
+    font-size: 20;
+    font-family: 'Unbounded', sans-serif;
+    align-self: center;
+  }
+
+  .checkboxform {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+
+  .chbwrap {
+    display: flex;
+    gap: 8px;
+  }
+
+  .style, .age, .exp, .price, .location, .schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .more {
+    height: 20px;
+    width: 23.4%;
+    background-color: #d9d9d9;
+    color: #FBF8F5;
+    border: none;
+    border-radius: 9;
+    font-size: 12;
+    font-family: 'Unbounded', sans-serif;
+    align-self: self-start;
+  }
+
+  .inp {
+    width: 65px;
+    font-size: 15;
+    font-family: 'Unbounded', sans-serif;
+    color: #1B1C20;
+  }
+
+  .inpform {
+    display: flex;
+    gap: 8px;
+  }
+
+  .leftside input{
+    accent-color: #E950A0;
+  }

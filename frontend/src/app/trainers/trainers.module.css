@@ -1,0 +1,56 @@
+    :local(#trainercardsflex) {
+    margin: 35px 81px 10px 347px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 20px;
+    column-gap: 0px;
+    background-color: aqua;
+  }
+
+  .searchbar {
+    display: flex;
+  align-items: center;
+  margin: 25px 4.167% 0px; 
+  height: 50px;
+  gap: 16px; 
+  }
+
+  .setbtn {
+    height: 50px;
+    width: 50px;
+    border: 3px solid #E950A0;     
+    background: #F0EBE5;
+    border-radius: 15;
+    text-align: center;
+    outline: none;
+    padding: 11px 10px;
+  }
+
+  .setbtn img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .searchbtn {
+    height: 50px;
+    width: 15.7%;
+    background-color: #E950A0;
+    color: #1B1C20;
+    border: none;
+    border-radius: 20;
+    font-size: 24;
+    font-family: 'Unbounded', sans-serif;
+  }
+
+  .inpbar {
+    height: 44px;
+    width: 100%;
+    border: 3px solid #E950A0;     
+    background: #F0EBE5;
+    border-radius: 20;
+    outline: none;
+    color: #1B1C20;
+    font-size: 20;
+    font-family: 'Unbounded', sans-serif;
+  }
