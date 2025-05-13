@@ -15,7 +15,7 @@ import { AuthModule } from './service/auth/auth.module';
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
-    TypeOrmModule.forRootAsync({
+    TypeOrmModule.forRootAsync({ 
       imports: [ConfigModule],
       useFactory: getPostgresConfig,
       inject: [ConfigService],
