@@ -8,13 +8,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { GroupModule } from './group/group.module';
+import { AuthModule } from './service/auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
-    TypeOrmModule.forRootAsync({
+    TypeOrmModule.forRootAsync({ 
       imports: [ConfigModule],
       useFactory: getPostgresConfig,
       inject: [ConfigService],
@@ -22,6 +23,8 @@ import { GroupModule } from './group/group.module';
     UserModule,
     RoleModule,
     GroupModule,
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

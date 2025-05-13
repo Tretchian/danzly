@@ -1,13 +1,28 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
+import { useContainer } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  
   app.setGlobalPrefix('api');
-  //sapp.useGlobalPipes(new ValidationPipe());
+  
+  // Настройка ValidationPipe
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    })
+  );
+  
+  // class-validator
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+
   app.enableCors({
-    origin: '*', // Разрешаем доступ с любого домена (лучше указать конкретный)
+    origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
   });
@@ -16,20 +31,14 @@ async function bootstrap() {
     .setTitle('SANDB[]X API')
     .setDescription('API description')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document, {
-    swaggerOptions: {
-      persistAuthorization: true,
-      tagsSorter: 'alpha',
-    },
-  });
-  const port = parseInt(process.env.PORT || '3000');
-  console.log('port = ', process.env.PORT);
-  const server = process.env.SERVER;
-  await app.listen(port, server || '0.0.0.0');
+  SwaggerModule.setup('api', app, document);
 
-  console.log(`Application is running on: ${await app.getUrl()+'/api'}`);
+  await app.listen(process.env.PORT || 3000);
+  console.log(`Application is running on: ${await app.getUrl()}/api`);
 }
 bootstrap();
+
