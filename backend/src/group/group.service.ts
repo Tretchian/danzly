@@ -4,6 +4,7 @@ import { UpdateGroupDto } from './dto/update-group.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Group } from './entities/group.entity';
 import { Repository } from 'typeorm';
+import { GetPageDto } from 'src/dto/get-page.dto';
 
 @Injectable()
 export class GroupService {
@@ -23,6 +24,13 @@ export class GroupService {
   findOne(id: number) {
     return this.repository.findOneByOrFail({id});
   }
+
+  findPage(pageDto: GetPageDto) {
+    const entities_to_skip = (pageDto.entities_on_page * pageDto.page);
+    console.log(pageDto);
+    return this.repository.find({skip: +entities_to_skip, take: +pageDto.entities_on_page});
+  }
+  
 
   async update(id: number, updateGroupDto: UpdateGroupDto) {
     const existingGroup = await this.repository.findOneBy({id});
