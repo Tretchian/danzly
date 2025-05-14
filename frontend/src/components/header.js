@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import styles from './header.module.css'
 import { useRouter } from 'next/navigation'
+import Link from "next/link";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -12,16 +13,18 @@ export default function Header() {
     <header className={styles.header}>
       {/* Левая часть: логотип и выпадающее меню */}
       <div className={styles.left}>
-        <img src="/logo.svg" alt="Logo" className={styles.logo} />
-
+        <Link href="/">           
+          <img src="/logo.svg" alt="Logo" className={styles.logo} />
+        </Link>
         <div
           className={styles.dropdownWrapper}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <button className={styles.dropdownToggle}>ищу тренера ▾</button>
+          <button className={styles.dropdownToggle}>Кто мне нужны? ▾</button>
           {menuOpen && (
             <ul className={styles.dropdownList}>
-              <li onClick={() => router.push('/page1')}>ищу танцоров</li>
+              <li onClick={() => router.push('/trainerstarter')}>танцоры</li>
+              <li onClick={() => router.push('/')}>тренеры</li>
             </ul>
           )}
         </div>
@@ -58,7 +61,7 @@ export default function Header() {
 
         <button
           className={styles.actionBtn}
-          onClick={() => router.push('/target-page')}
+          onClick={() => router.push('/auto')}
         >
           Вход
         </button>

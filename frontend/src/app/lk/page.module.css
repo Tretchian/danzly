@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  align-items: stretch;
+  height: 100vh;
+  font-family: Unbounded, Unbounded Fallback;
+}
+
+.logo {
+  position: absolute;
+  width: auto;
+  height: 100%;
+  margin: 8px 4.167% 0px; 
+}
+
+.leftSection {
+  width: 50%;
+  padding: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+}
+
+.submitButton {
+  padding: 10px;
+  font-size: 18px;
+  background-color: #ff85b3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #e06a99;
+}
+
+.footerText {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.loginLink {
+  color: #ff85b3;
+  text-decoration: none;
+}
+
+.rightSection {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.infoCard {
+  text-align: center;
+  max-width: 300px;
+}
+
+.infoText {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.subText {
+  font-size: 16px;
+}

@@ -1,0 +1,51 @@
+:local(main) {
+    display: flex;
+    justify-content: space-between;
+    margin: 80px 11.875% 144px;
+    gap: 62px;
+  }
+  
+  :local(#mainpic) {
+    width: 46.45%;
+    height: auto;
+  }
+  
+  :local(#mainleftpart) {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mainlefttoppart {
+    margin: 14.61% 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .mainlefttoppart h1 {
+    font-size: 48;
+  }
+  
+  .mainlefttoppart p {
+    align-self: flex-start;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20;
+    margin-top: 16px;
+  }
+  
+  .searchbtn {
+    height: 60px;
+    width: 50%;
+    background-color: #E950A0;
+    color: #1B1C20;
+    border: none;
+    align-self: flex-end;
+    border-radius: 20;
+    font-size: 24;
+    font-family: 'Unbounded', sans-serif;
+  }
+  
+  .searchbtn:hover {
+    cursor: pointer;
+  }

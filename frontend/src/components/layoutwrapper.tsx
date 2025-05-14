@@ -6,8 +6,9 @@ import Header from './header'
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
-  // Спрячем Header на странице логина
-  const hideHeader = pathname === '/lk'
+  // Массив путей, на которых нужно скрыть Header
+  const hiddenHeaderPaths = ['/lk', '/auto'] // добавь сюда нужные пути
+  const hideHeader = hiddenHeaderPaths.includes(pathname)
 
   return (
     <>
