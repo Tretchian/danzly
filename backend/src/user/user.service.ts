@@ -51,10 +51,18 @@ export class UserService {
     return this.repository.find({skip: +entities_to_skip, take: +pageDto.entities_on_page});
   }
 
-  async findOneByEmail(email: string) {
-    return await this.userRepository.findOne ({
+  async findOneById(id: number) {
+    return await this.repository.findOne ({
       where: {
-        email,
+        id
+      },
+    });
+  }
+
+  async findOneByEmail(email: string) {
+    return await this.repository.findOne ({
+      where: {
+        email
       },
     });
   }

@@ -52,15 +52,3 @@ pids
 *.pid
 *.seed
 *.pid.lock
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-sql_homework/create-tables.sql
-sql_homework/insert-values.sql
-sql_homework/task-1.sql
-sandbox.session.sql
-sql_homework/task-2.sql
-sql_homework/task-3.sql
-sql_homework/task-4.sql
-sql_homework/task-5.sql
-sql_homework/task-6-7.sql
