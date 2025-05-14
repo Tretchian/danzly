@@ -1,6 +1,6 @@
 /* header.module.css */
 
-:local(.header) {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,8 +11,8 @@
 }
 
 /* сохранили .left и .right без изменений */
-:local(.left),
-:local(.right) {
+.left,
+.right {
   display: flex;
   align-items: center;
   gap: 45px;
