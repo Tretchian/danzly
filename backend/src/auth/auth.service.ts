@@ -12,7 +12,11 @@ export class AuthService {
  ){}
     
  async validateUser(email: string, password: string) {
-    const user = await this.userService.findOne(email);
+    const user = await this.userService.findOneByEmail(email);
+    if (!user) {
+      throw new UnauthorizedException('Неверный логин или пароль');
+    }
+
     const passwordIsMatch = await argon2.verify(user.password, password)
 
     if (user && passwordIsMatch) {
