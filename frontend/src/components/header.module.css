@@ -1,6 +1,6 @@
 /* header.module.css */
 
-:local(.header) {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,19 +11,19 @@
 }
 
 /* сохранили .left и .right без изменений */
-:local(.left),
-:local(.right) {
+.left,
+.right {
   display: flex;
   align-items: center;
   gap: 45px;
   height: 100%;
 }
 
-:local(.logoWrapper) {
+.logoWrapper {
   display: flex;
   align-items: center;
 }
-:local(.logo) {
+.logo {
   width: auto;
   height: 100%;
 }
@@ -33,7 +33,7 @@
   position: relative;
   cursor: pointer;
 }
-:local(.dropdownToggle) {
+.dropdownToggle {
   height: 100%;
   background: none;
   font-size: 20px;
@@ -43,10 +43,10 @@
   padding: 7px 10px 6px 10px;
   border-radius: 38px;
 }
-:local(.right) .dropdownToggle {
+.right .dropdownToggle {
   border: none;
 }
-:local(.dropdownList) {
+.dropdownList {
   position: absolute;
   top: 100%;
   left: 0;
@@ -60,17 +60,17 @@
   background-color: #eee;
   z-index: 20;
 }
-:local(.right) .dropdownList {
+.right .dropdownList {
   padding: 0 5px;
   border-radius: 26px;
 }
-:local(.dropdownList li) {
+.dropdownList li {
   padding: 6px 10px 7px 10px;
   cursor: pointer;
 }
 
 /* кнопка входа */
-:local(.actionBtn) {
+.actionBtn {
   padding: 8px 16px;
   background-color: #E950A0;
   width: 210px;
@@ -135,7 +135,7 @@
   }
 
   /* подправим высоту хедера */
-  :local(.header) {
+  .header {
     height: auto;
   }
 }
