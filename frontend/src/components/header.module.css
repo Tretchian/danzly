@@ -1,11 +1,16 @@
+/* header.module.css */
+
 :local(.header) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 4.167% 0px; 
-  height: 42px;  
+  margin: 20px 4.167% 0;
+  padding-bottom: 10px;
+  position: relative; /* для absolute mobileMenu */
+  height: 42px;
 }
 
+/* сохранили .left и .right без изменений */
 :local(.left),
 :local(.right) {
   display: flex;
@@ -14,72 +19,123 @@
   height: 100%;
 }
 
+:local(.logoWrapper) {
+  display: flex;
+  align-items: center;
+}
 :local(.logo) {
   width: auto;
   height: 100%;
 }
 
+/* кнопки‑дропдауны */
 :local(.dropdownWrapper) {
   position: relative;
   cursor: pointer;
 }
-
 :local(.dropdownToggle) {
   height: 100%;
   background: none;
-  font-size: 20;
+  font-size: 20px;
   font-family: 'Unbounded', sans-serif;
   cursor: pointer;
-  border: 2px solid #E950A0; 
-  padding: 7 10 6 10;       /*отступы*/
-  border-radius: 38;     
+  border: 2px solid #E950A0;
+  padding: 7px 10px 6px 10px;
+  border-radius: 38px;
 }
-
-.right .dropdownToggle {
+:local(.right) .dropdownToggle {
   border: none;
 }
-
 :local(.dropdownList) {
   position: absolute;
   top: 100%;
   left: 0;
   list-style: none;
-  margin: 4px 0 0 0;
+  margin: 4px 0 0;
   width: 100%;
   font-family: 'Unbounded', sans-serif;
-  font-size: 20;
-  border: 2px solid #E950A0; 
-  border-radius: 26;      
+  font-size: 20px;
+  border: 2px solid #E950A0;
+  border-radius: 26px;
   background-color: #eee;
-  /*z-index: 10;*/
+  z-index: 20;
 }
-
-.right .dropdownList {
+:local(.right) .dropdownList {
   padding: 0 5px;
-  border-radius: 26;
+  border-radius: 26px;
 }
-
 :local(.dropdownList li) {
-  padding: 6 10 7 10;
+  padding: 6px 10px 7px 10px;
   cursor: pointer;
 }
 
-.actionBtn {
+/* кнопка входа */
+:local(.actionBtn) {
   padding: 8px 16px;
   background-color: #E950A0;
   width: 210px;
   color: #1B1C20;
   font-family: 'Unbounded', sans-serif;
-  font-size: 20;
+  font-size: 20px;
   border: none;
-  border-radius: 38;
+  border-radius: 38px;
   cursor: pointer;
 }
 
-.logo:hover {
+/* ==== Бургер ==== */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
   cursor: pointer;
 }
+.bar {
+  width: 25px;
+  height: 3px;
+  background: #E950A0;
+}
 
-/*.actionBtn:hover {
-  background-color: #005fc1;
-}*/
+/* ==== Десктопное меню-обёртка ==== */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ==== Мобильное меню ==== */
+.mobileMenu {
+  display: none; /* будет включено через React */
+}
+
+/* ===== Адаптив ===== */
+@media (max-width: 768px) {
+  /* на мобилке скрываем оригинальные .left и .right */
+  .desktopNav {
+    display: none;
+  }
+
+  /* показываем бургер */
+  .burger {
+    display: flex;
+  }
+
+  /* мобильное меню: поверх всего */
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: absolute;
+    top: 42px;
+    right: 4.167%;
+    background: #fff;
+    padding: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 10;
+    width: 200px;
+  }
+
+  /* подправим высоту хедера */
+  :local(.header) {
+    height: auto;
+  }
+}

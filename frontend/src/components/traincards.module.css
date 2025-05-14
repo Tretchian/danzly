@@ -17,7 +17,6 @@
   margin: 20px 28px 0px 0px;
   display: flex;
   flex-direction: column;
-  background-color: aqua;
 }
 
 .cardhead {
@@ -53,7 +52,6 @@
   flex-direction: column;
   gap: 12px;
   margin-top: 8px;
-  background-color: aquamarine;
 }
 
 .trainertags {
@@ -69,7 +67,15 @@
 }
 
 .addres {
-  background-color: blueviolet;
   height: 19px;
   display: flex;
+}
+
+.cardinfo h3 {
+  align-self: flex-end ;
+}
+
+.cardinfo p {
+  color: #1B1C20;
+  text-decoration: none;
 }
