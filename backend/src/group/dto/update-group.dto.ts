@@ -1,37 +1,37 @@
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { CreateGroupDto } from './create-group.dto';
-import { User } from 'src/user/entities/user.entity';
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
 
 export class UpdateGroupDto extends PartialType(CreateGroupDto) {
-    @ApiPropertyOptional({
-        type:User,
-        default:{id:1}
-    })
-  owner: User;
+  @ApiPropertyOptional({ example: 1 })
+  @IsOptional()
+  @IsNumber()
+  ownerId?: number;
 
-  @ApiPropertyOptional({
-    maxLength:63
-    })
-  name: string;
+  @ApiPropertyOptional({ maxLength: 63 })
+  @IsOptional()
+  @IsString()
+  name?: string;
 
-  @ApiPropertyOptional({
-    maxLength:250
-    })
-  description: string;
+  @ApiPropertyOptional({ maxLength: 250 })
+  @IsOptional()
+  @IsString()
+  description?: string;
 
-  @ApiPropertyOptional({
-    nullable:false,
-    default:10
-    })
-  max_people: number;
+  @ApiPropertyOptional({ default: 10 })
+  @IsOptional()
+  @IsNumber()
+  @Min(1)
+  @Max(999)
+  max_people?: number;
 
-  @ApiPropertyOptional({
-    default:0
-  })
-  current_people: number;
+  @ApiPropertyOptional({ default: 0 })
+  @IsOptional()
+  @IsNumber()
+  current_people?: number;
 
-  @ApiPropertyOptional({
-    default:true
-  })
-  is_open: boolean;
+  @ApiPropertyOptional({ default: true })
+  @IsOptional()
+  @IsBoolean()
+  is_open?: boolean;
 }

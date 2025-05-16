@@ -12,7 +12,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { GetPageDto } from '../dto/get-page.dto';
-import { UserIdDto } from './dto/user-id.dto';
+import {IdDto } from '../dto/id.dto';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Users')
@@ -42,20 +42,20 @@ export class UserController {
 
   @Get(':id')
   @ApiParam({ name: 'id', type: 'string' })
-  findOne(@Param() params: UserIdDto) {
+  findOne(@Param() params: IdDto) {
     return this.userService.findOneById(params.id);
   }
 
   @Patch(':id')
   @ApiParam({ name: 'id', type: Number })
-  update(@Param() params: UserIdDto, @Body() updateUserDto: UpdateUserDto) {
+  update(@Param() params: IdDto, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(params.id, updateUserDto);
   }
 
 
   @Delete(':id')
   @ApiParam({ name: 'id', type: Number })
-  remove(@Param() params: UserIdDto) {
+  remove(@Param() params: IdDto) {
     return this.userService.remove(params.id);
   }
 }

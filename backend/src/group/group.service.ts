@@ -5,24 +5,37 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Group } from './entities/group.entity';
 import { Repository } from 'typeorm';
 import { GetPageDto } from 'src/dto/get-page.dto';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class GroupService {
   constructor(
     @InjectRepository(Group)
-    private readonly repository: Repository<Group>
+    private readonly repository: Repository<Group>,
+
+    @InjectRepository(User)
+    private readonly userRepository : Repository<User>
   ){}
 
   async create(createGroupDto: CreateGroupDto) {
-    return this.repository.save(createGroupDto);
+    const ownerId = createGroupDto.ownerId;
+    if (!(await this.userRepository.existsBy({ id: ownerId }))) {
+      throw new BadRequestException(`Пользователь с id ${ownerId} не существует`);
+    }
+    const group = this.repository.create({
+      ...createGroupDto,
+      owner: { id: ownerId },
+    });
+
+    return this.repository.save(group);
   }
 
   findAll() {
     return this.repository.find();
   }
 
-  findOne(id: number) {
-    return this.repository.findOneByOrFail({id});
+  findOneById(id: number) {
+    return this.repository.findOneBy({id});
   }
 
   findPage(pageDto: GetPageDto) {
@@ -39,8 +52,17 @@ export class GroupService {
         `Группы с id ${id} не существует`
       );
     }
+
+    if (updateGroupDto.ownerId !== undefined && updateGroupDto.ownerId !== null) {
+      const ownerExists = await this.userRepository.existsBy({ id: updateGroupDto.ownerId });
+      if (!ownerExists) {
+        throw new BadRequestException(`Пользователь с id ${updateGroupDto.ownerId} не существует`);
+      }
+      existingGroup.owner = { id: updateGroupDto.ownerId } as any;
+    }
+
     Object.keys(updateGroupDto).forEach((key) =>{
-      if (updateGroupDto[key] !== null && updateGroupDto !== undefined){
+      if (updateGroupDto[key] !== null && updateGroupDto !== undefined && key !== 'ownerId'){
         existingGroup[key] = updateGroupDto[key];
       }
     });
