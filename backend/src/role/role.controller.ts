@@ -10,6 +10,8 @@ import {
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
+import { ApiParam } from '@nestjs/swagger';
+import { IdDto } from 'src/dto/id.dto';
 
 @Controller('role')
 export class RoleController {
@@ -28,17 +30,20 @@ export class RoleController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.roleService.findOne(+id);
+  @ApiParam({ name: 'id', type: 'string' })
+  findOne(@Param() params: IdDto) {
+    return this.roleService.findOneById(params.id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {
-    return this.roleService.update(+id, updateRoleDto);
+  @ApiParam({ name: 'id', type: 'string' })
+  update(@Param() params: IdDto, @Body() updateRoleDto: UpdateRoleDto) {
+    return this.roleService.update(params.id, updateRoleDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.roleService.remove(+id);
+  @ApiParam({ name: 'id', type: 'string' })
+  remove(@Param() params: IdDto) {
+    return this.roleService.remove(params.id);
   }
 }

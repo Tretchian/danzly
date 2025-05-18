@@ -29,18 +29,17 @@ constructor(
     return this.repository.find({});
   }
 
-  findOne(id: number) {
-    return this.repository.findOneByOrFail({id});
+  findOneById(id: number) {
+    return this.repository.findOneBy({id});
   }
 
   async update(id: number, updateRoleDto: UpdateRoleDto) {
-    const existingRole = await this.repository.findOneByOrFail({id});
+    const existingRole = await this.repository.findOneBy({id});
     if (!existingRole) {
       throw new BadRequestException(
        `Роли с id ${id} не сущестует`
       );
     }
-    // Динамически обновляем все поля, кроме undefined и null
     Object.keys(updateRoleDto).forEach((key) => {
       if (updateRoleDto[key] !== null && updateRoleDto[key] !== undefined) {
           existingRole[key] = updateRoleDto[key];
