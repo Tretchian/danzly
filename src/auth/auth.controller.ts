@@ -1,4 +1,3 @@
-// auth.controller.ts
 import { Controller, Post, Get, Request, UseGuards, Body } from '@nestjs/common';
 import { 
   ApiTags, 
@@ -13,7 +12,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LoginDto } from './dto/login.dto';
 
 @ApiTags('Auth')
-@ApiBearerAuth('JWT-auth') // Указываем имя схемы безопасности
+@ApiBearerAuth('JWT-auth') 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -21,7 +20,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @ApiOperation({ summary: 'User login' })
-  @ApiBody({ type: LoginDto }) // Явное указание DTO
+  @ApiBody({ type: LoginDto }) // Используем LoginDto для регистрации
   @ApiResponse({ 
     status: 200, 
     description: 'Returns JWT token' 
@@ -30,10 +29,7 @@ export class AuthController {
     status: 401, 
     description: 'Invalid credentials' 
   })
-  async login(
-    @Request() req, 
-    @Body() body: LoginDto // Явное использование DTO
-  ) {
+  async login(@Request() req) {
     return this.authService.login(req.user);
   }
 

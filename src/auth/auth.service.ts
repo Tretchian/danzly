@@ -11,22 +11,24 @@ export class AuthService {
     private readonly jwtService: JwtService,
  ){}
     
- async validateUser(email: string, password: string) {
-    const user = await this.userService.findOne(email);
-    const passwordIsMatch = await argon2.verify(user.password, password)
+async validateUser(email: string, password: string) {
+  const user = await this.userService.findOne(email);
+  if (!user) throw new UnauthorizedException('Неверный email или пароль');
 
-    if (user && passwordIsMatch) {
-      return user
-    }
-    throw new UnauthorizedException('Почта или пароль неверны');    
- }
+  const isMatch = await argon2.verify(user.password, password);
+  if (!isMatch) throw new UnauthorizedException('Неверный email или пароль');
+
+  return user;
+}
+
 
  async login(user: IUser) {
-    const { id, email } = user
-    return {
-        id,
-        email,
-        token: this.jwtService.sign({ id: user.id, email: user.email })
-    }
-  }
+  const payload = { id: user.id, email: user.email};
+  return {
+    id: user.id,
+    email: user.email,
+    token: this.jwtService.sign(payload),
+  };
+}
+
 }

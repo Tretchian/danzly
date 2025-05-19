@@ -31,7 +31,17 @@ async function bootstrap() {
     .setTitle('SANDB[]X API')
     .setDescription('API description')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addBearerAuth  (
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Authorization',
+        description: 'Введите JWT токен',
+        in: 'header',
+      },
+      'JWT-auth',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
