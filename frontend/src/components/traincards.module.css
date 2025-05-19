@@ -1,0 +1,75 @@
+.trainercard {
+  width: 721px;
+  background-color: #FFFDF9;
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  gap: 22px;
+  border-radius: 40;
+}
+
+.profimg {
+  height: 254px;
+  width: 203px;
+}
+
+.cardinfo {
+  margin: 20px 28px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  background-color: aqua;
+}
+
+.cardhead {
+  margin: 0px 0px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.avtitle {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  width: 55%;
+}
+
+.avtitle h2 {
+  font-size: 24;
+}
+
+.rate {
+  display: flex;
+  gap: 4px;
+  height: 19px;
+  align-self: center;
+}
+
+.rate h4 {
+  font-size: 15;
+}
+.cardmain {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+  background-color: aquamarine;
+}
+
+.trainertags {
+  display: flex;
+  gap: 8px;
+}
+
+.tag {
+  border: 1px solid #E950A0;
+  height: 23px;
+  border-radius: 11;
+  padding: 2px 8px 0px;
+}
+
+.addres {
+  background-color: blueviolet;
+  height: 19px;
+  display: flex;
+}

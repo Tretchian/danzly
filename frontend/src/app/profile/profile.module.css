@@ -1,0 +1,111 @@
+  .main {
+    margin-top: 20px;
+  }
+  
+  /* Основной блок (о тренере) */
+  .trainerInfo {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .trainerImage {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .trainerDetails {
+    flex: 1;
+  }
+  
+  .location {
+    color: #666;
+  }
+  
+  .specialization span {
+    display: inline-block;
+    background: #FF007A;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+  
+  .experience {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .about {
+    margin-top: 20px;
+    color: #444;
+  }
+  
+  /* Набор в группы */
+  .groups h2 {
+    margin-bottom: 20px;
+  }
+  
+  .groupCards {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .groupCard {
+    background: #F9F9F9;
+    border: 1px solid #EEE;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 250px;
+    display: flex;
+  }
+  
+  .groupCard img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .groupDetails {
+    margin: 10px 0;
+    color: #666;
+  }
+  
+  .showMore {
+    background: #FF007A;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .showMore:hover {
+    background: #E0006A;
+  }
+  
+  /* Отзывы */
+  .reviews h2 {
+    margin-bottom: 20px;
+  }
+  
+  .reviewCards {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .reviewCard {
+    background: #F9F9F9;
+    border: 1px solid #EEE;
+    border-radius: 10px;
+    padding: 15px;
+    flex: 1;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
