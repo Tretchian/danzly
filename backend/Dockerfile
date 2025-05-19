@@ -1,6 +1,8 @@
 # Используем официальный образ Node.js
 FROM node:20
 
+LABEL description="Backend container for danzly"
+
 # Задаем рабочую директорию внутри контейнера
 WORKDIR /app
 
@@ -17,7 +19,7 @@ COPY . .
 RUN npm run build
 
 # Открываем порт, который использует приложение (например, 3000)
-# EXPOSE 7777
+EXPOSE 7777
 
 # Команда для запуска сервера
 CMD ["npm", "run", "start"]
