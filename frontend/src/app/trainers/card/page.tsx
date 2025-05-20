@@ -1,4 +1,5 @@
 import styles from './card.module.css';
+import Link from "next/link";
 
 export default function lk() {
     return (
@@ -15,11 +16,13 @@ export default function lk() {
         {/* Информация */}
         <div className={styles.contentSection}>
           <div className={styles.header}>
+                      <Link href="/profile">
             <img
               src="/ellipse 43.svg"
               alt="Trainer"
               className={styles.avatar}
             />
+            </Link>
             <div className={styles.title}>Studio Rythm</div>
             <div className={styles.rating}>★ 4.8</div>
           </div>

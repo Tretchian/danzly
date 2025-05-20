@@ -1,4 +1,3 @@
-// app/page.tsx или соответствующий файл, только main-часть
 'use client';
 
 import { useRouter } from 'next/navigation';
@@ -13,7 +12,6 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {/* фон-баннер */}
       <img
         src="/banner.png"
         alt="Banner"

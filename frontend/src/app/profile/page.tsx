@@ -34,11 +34,8 @@ export default function lk() {
 
         {/* Секция "Набор в группы" */}
         <section className={styles.groups}>
-          <h2>Набор в группы <span className={styles.groupCount}>6</span></h2>
+          <h2>Набор в группы <span className={styles.groupCount}>1</span></h2>
           <div id={styles.groupCards}>
-            <Studiocard />
-            <Studiocard />
-            <Studiocard />
             <Studiocard />
           </div>
           <button className={styles.showAllGroups}>Показать все</button>

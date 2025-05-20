@@ -78,7 +78,7 @@ export default function Register() {
         </form>
 
         <p className={styles.footerText}>
-          есть аккаунт? <a href="/login" className={styles.loginLink}>Войти</a>
+          есть аккаунт? <a href="/auto" className={styles.loginLink}>Войти</a>
         </p>
       </div>
 
